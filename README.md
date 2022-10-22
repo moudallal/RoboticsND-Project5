@@ -27,6 +27,8 @@ The purpose of this final project is to implement all previous major skills lear
 - Write a pick_objects node that is responsible of actuating the robot to various locations inside the mapped environment
 - Write an add_markers node that is responsible of publishing marker locations to simulate picking up and dropping off objects
 
+The requirements of this project were met as approved by Udacity's reviewers.
+
 ![](https://i.imgur.com/Bi0z5xi.png)
 <p align = "center"><b>Fig.1 - Robot inside Gazebo simulation environment</b></p>
 
