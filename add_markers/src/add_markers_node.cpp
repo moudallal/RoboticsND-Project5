@@ -26,9 +26,9 @@ double getDistanceToPose(double goal[3])
 }
 
 // Define checkDistance method to check if the robot is close to a specified zone
-bool checkDistance(double checkPose[3])
+bool checkDistance(double check_pose[3])
 {
-  return getDistanceToPose(checkPose) < 0.2;
+  return getDistanceToPose(check_pose) < 0.2;
 }
 
 int main(int argc, char **argv)
