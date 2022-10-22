@@ -20,23 +20,15 @@ void getPose(const nav_msgs::Odometry::ConstPtr &msg)
 }
 
 // Define getDistanceToPose method to get the distance between the robot and the goal pose
-double getDistanceToPose(double goal_pose[3])
+double getDistanceToPose(double goal[3])
 {
-  double x = goal_pose[0] - pose[0];
-  double y = goal_pose[1] - pose[1];
-  return sqrt(pow(x, 2) + pow(y, 2));
+  return sqrt(pow(goal[0] - pose[0], 2) + pow(goal[1] - pose[1], 2));
 }
 
-// Define checkPickup method to check if the robot reached the pickup zone
-bool checkPickup()
+// Define checkDistance method to check if the robot is close to a specified zone
+bool checkDistance(double checkPose[3])
 {
-  return getDistanceToPose(pickup_pose) < 0.2;
-}
-
-// Define checkDropOff method to check if the robot reached the dropoff zone
-bool checkDropoff()
-{
-  return getDistanceToPose(dropoff_pose) < 0.2;
+  return getDistanceToPose(checkPose) < 0.2;
 }
 
 int main(int argc, char **argv)
@@ -101,7 +93,7 @@ int main(int argc, char **argv)
       // Publish new marker action
       marker_pub.publish(marker);
       // Check if the robot is close enough to the pick up zone (0.2m away from pickup_pose)
-      if (checkPickup())
+      if (checkDistance(pickup_pose))
       {
         sleep(5);
         ROS_INFO("Pickup zone has been reached.");
@@ -119,7 +111,7 @@ int main(int argc, char **argv)
       // Publish new marker action
       marker_pub.publish(marker);
       // Check if the robot is close enough from the drop off zone (0.2 m away from dropoff_pose)
-      if (checkDropoff())
+      if (checkDistance(dropoff_pose))
       {
         ROS_INFO("Dropoff zone has been reached.");
         // Update state
